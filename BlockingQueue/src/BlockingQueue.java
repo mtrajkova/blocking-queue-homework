@@ -163,5 +163,8 @@ public class BlockingQueue<E> {
         }
     }
 
+    public LinkedList<E> getList(){
+        return this.list;
+    }
 
 }

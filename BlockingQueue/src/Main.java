@@ -22,16 +22,14 @@ public class Main {
             switch (random.get()) {
                 case 0:
                     System.out.println("ADDING ELEMENT *" + element.get() + "* WITH SUCCESS " + blockingQueue.add(element.get()));
-//                    blockingQueue.add(element.get());
                     break;
                 case 1:
                     System.out.println("OFFERING ELEMENT *" + element.get() + "* WITH SUCCESS " + blockingQueue.offer(element.get()));
-//                    blockingQueue.offer(element.get());
                     break;
                 case 2:
                     try {
-                        System.out.println("PUTTING ELEMENT *" + element.get() + "*");
                         blockingQueue.put(element.get());
+                        System.out.println("PUTTING ELEMENT *" + element.get() + "*");
                     } catch (InterruptedException e) {
                         System.out.println("BLOCKING QUEUE IS FULL");
                     }
@@ -40,23 +38,21 @@ public class Main {
                     System.out.println("REMAINING CAPACITY " + blockingQueue.remainingCapacity() + "\n");
                     break;
                 case 4:
-                    System.out.println("CONTAINS ELEMENT " + element.get() + blockingQueue.contains(element.get()));
+                    System.out.println("CONTAINS ELEMENT " + element.get() + " " + blockingQueue.contains(element.get()));
                     break;
                 case 5:
                     System.out.println("REMOVING ELEMENT *" + element.get() + "* WITH SUCCESS " + blockingQueue.remove(element.get()));
                     break;
                 case 6:
                     try {
-                        System.out.println("REMOVING FIRST ELEMENT WITH TAKE *" + blockingQueue.take() + "*");
+                        System.out.println("REMOVING FIRST ELEMENT *" + blockingQueue.take() + "* WITH TAKE");
                     } catch (InterruptedException e) {
                         System.out.println("BLOCKING QUEUE IS EMPTY");
                     }
                     break;
                 case 7:
-                    System.out.println("REMOVING FIRST ELEMENT WITH POLL");
                     try {
-                        System.out.println("REMOVING FIRST ELEMENT WITH POLL WITH SUCCESS " + blockingQueue.poll(timeout.get(), unit.get()));
-//                        blockingQueue.poll(timeout.get(), unit.get());
+                        System.out.println("REMOVING FIRST ELEMENT *" + blockingQueue.poll(timeout.get(), unit.get()) + "* WITH POLL");
                     } catch (InterruptedException e) {
                         System.out.println("NO CAN DO WITH POLLING");
                     }
@@ -64,8 +60,7 @@ public class Main {
                 case 8:
                     System.out.println();
                     try {
-//                        blockingQueue.offer(element.get(), timeout.get(), unit.get());
-                        System.out.println("OFFERING ELEMENT WITH TIMEOUT *" + element.get() + "* OFFERING ELEMENT SUCCESS " + blockingQueue.offer(element.get(), timeout.get(), unit.get()));
+                        System.out.println("OFFERING ELEMENT WITH TIMEOUT *" + element.get() + "* WITH SUCCESS " + blockingQueue.offer(element.get(), timeout.get(), unit.get()));
                     } catch (InterruptedException e) {
                         System.out.println("NO CAN DO WITH OFFERING ELEMENT" + element.get());
                     }
@@ -76,8 +71,8 @@ public class Main {
 
         }
 
-        public BlockingQueue getBlockingQueue() {
-            return blockingQueue;
+        public LinkedList getBlockingQueueContent() {
+            return blockingQueue.getList();
         }
     }
 
@@ -95,6 +90,8 @@ public class Main {
             thread.join();
         }
 
-
+        for(Object element : sharedRunnableInstance.getBlockingQueueContent()){
+            System.out.println(element);
+        }
     }
 }
